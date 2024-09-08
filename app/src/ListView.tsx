@@ -3,6 +3,7 @@ import { FlatList, StyleSheet, TextInput, View, Text } from "react-native";
 
 interface ListViewProps {
   items?: TodoItem[];
+  updateItem: (index: number, content: string) => void;
 }
 
 type TodoItem = {
@@ -12,14 +13,25 @@ type TodoItem = {
 
 function ListView(props: ListViewProps) {
   const items = props.items ?? [];
-
   return (
     <View style={styles.container}>
       <FlatList
         data={items}
-        renderItem={({ item }) => (
+        extraData={items}
+        renderItem={({ item, index }) => (
           <View style={styles.itemContainer}>
-            <TextInput style={styles.textInput} value={item.content} />
+            <TextInput
+              style={styles.textInput}
+              value={item.content}
+              placeholder="내용을 입력하세요."
+              onChangeText={(newtext) => {
+                props.updateItem(index, newtext);
+              }}
+              onSubmitEditing={() => {
+                console.log(item.content, index);
+                props.updateItem(index, item.content);
+              }}
+            />
           </View>
         )}
       />

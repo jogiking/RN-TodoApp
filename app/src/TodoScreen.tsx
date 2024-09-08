@@ -27,9 +27,21 @@ function TodoScreen({}: TodoScreenProps) {
     setTodoList([newTodo, ...todoList]);
   };
 
+  const updateItem = (index: number, content: string) => {
+    setTodoList((currentList) => {
+      const newItems = [...currentList];
+      newItems[index] = { ...newItems[index], content: content };
+      return newItems;
+    });
+  };
+
   return (
     <View style={styles.container}>
-      <ListView style={styles.listViewContainer} items={todoList} />
+      <ListView
+        style={styles.listViewContainer}
+        items={todoList}
+        updateItem={updateItem}
+      />
       <TouchableOpacity style={styles.addContainer} onPress={addTodo}>
         <Text style={styles.addText}>+</Text>
       </TouchableOpacity>
