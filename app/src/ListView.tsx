@@ -21,6 +21,7 @@ type TodoItem = {
 
 function ListView(props: ListViewProps) {
   const items = props.items ?? [];
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -28,7 +29,12 @@ function ListView(props: ListViewProps) {
         extraData={items}
         renderItem={({ item, index }) => (
           <View style={styles.itemContainer}>
-            <TouchableOpacity style={styles.delete}>
+            <TouchableOpacity
+              style={styles.delete}
+              onPress={() => {
+                props.deleteItem(index);
+              }}
+            >
               <Entypo name="circle-with-cross" size={24} color={"#C63B64"} />
             </TouchableOpacity>
             <TextInput

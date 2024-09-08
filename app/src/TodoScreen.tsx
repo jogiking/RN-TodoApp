@@ -35,12 +35,22 @@ function TodoScreen({}: TodoScreenProps) {
     });
   };
 
+  const deleteItem = (index: number) => {
+    console.log("delete", index);
+    setTodoList((currentList) => {
+      const newItems = [...currentList];
+      newItems.splice(index, 1);
+      return newItems;
+    });
+  };
+
   return (
     <View style={styles.container}>
       <ListView
         style={styles.listViewContainer}
         items={todoList}
         updateItem={updateItem}
+        deleteItem={deleteItem}
       />
       <TouchableOpacity style={styles.addContainer} onPress={addTodo}>
         <Text style={styles.addText}>+</Text>
