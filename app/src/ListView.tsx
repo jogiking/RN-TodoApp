@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, StyleSheet, View, Text } from "react-native";
+import { FlatList, StyleSheet, TextInput, View, Text } from "react-native";
 
 interface ListViewProps {
   items?: TodoItem[];
@@ -18,7 +18,9 @@ function ListView(props: ListViewProps) {
       <FlatList
         data={items}
         renderItem={({ item }) => (
-          <Text style={styles.item}>{item.content}</Text>
+          <View style={styles.itemContainer}>
+            <TextInput style={styles.textInput} value={item.content} />
+          </View>
         )}
       />
     </View>
@@ -30,10 +32,15 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 22,
   },
-  item: {
+  itemContainer: {
     padding: 10,
     fontSize: 18,
     height: 44,
+    backgroundColor: "#C4C4E7",
+    marginBottom: 3,
+  },
+  textInput: {
+    fontSize: 24,
   },
 });
 
