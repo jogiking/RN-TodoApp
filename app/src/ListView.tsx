@@ -1,5 +1,13 @@
 import React from "react";
-import { FlatList, StyleSheet, TextInput, View, Text } from "react-native";
+import {
+  TouchableOpacity,
+  FlatList,
+  StyleSheet,
+  TextInput,
+  View,
+  Text,
+} from "react-native";
+import Entypo from "@expo/vector-icons/Entypo";
 
 interface ListViewProps {
   items?: TodoItem[];
@@ -20,6 +28,9 @@ function ListView(props: ListViewProps) {
         extraData={items}
         renderItem={({ item, index }) => (
           <View style={styles.itemContainer}>
+            <TouchableOpacity style={styles.delete}>
+              <Entypo name="circle-with-cross" size={24} color={"#C63B64"} />
+            </TouchableOpacity>
             <TextInput
               style={styles.textInput}
               value={item.content}
@@ -50,9 +61,15 @@ const styles = StyleSheet.create({
     height: 44,
     backgroundColor: "#C4C4E7",
     marginBottom: 3,
+    flexDirection: "row",
+    justifyContent: "flex-start",
   },
   textInput: {
     fontSize: 24,
+  },
+  delete: {
+    width: 30,
+    marginRight: 10,
   },
 });
 
